@@ -9,6 +9,7 @@ import android.view.View;
 import com.lemonjun.library.base.BaseClickWarntDialog;
 import com.lemonjun.library.base.BaseLoadingDialog;
 import com.lemonjun.library.base.BaseWarntDialog;
+import com.lemonjun.library.tools.BaseDialogTools;
 
 public class MainActivity extends AppCompatActivity {
 
@@ -21,12 +22,10 @@ public class MainActivity extends AppCompatActivity {
     public void onClick(View view){
         switch (view.getId()){
             case R.id.btn_load:
-                BaseLoadingDialog dialog = new BaseLoadingDialog(this);
-                dialog.show();
+                BaseDialogTools.getInstance().createLoadDialog(this,"hahah").show();
                 break;
             case R.id.btn_want:
-                BaseWarntDialog dWarnt = new BaseWarntDialog(this);
-                dWarnt.show();
+                BaseDialogTools.getInstance().createWarntDialog(this).show();
                 break;
             case R.id.btn_want_btn:
                 BaseClickWarntDialog clickWarntDialog = new BaseClickWarntDialog(this);

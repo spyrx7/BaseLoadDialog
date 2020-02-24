@@ -19,7 +19,7 @@ public class BaseWarntDialog extends Dialog {
     /**
      *  时间长度 单位毫秒
      */
-    private long timeLenger = 3000;
+    private long timeLenger = Config.waitingTime;
 
     private Runnable timeRunnable = new Runnable() {
         @Override

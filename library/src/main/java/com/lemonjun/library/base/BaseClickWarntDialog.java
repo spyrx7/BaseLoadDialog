@@ -21,7 +21,7 @@ public class BaseClickWarntDialog extends Dialog {
     /**
      *  时间长度 单位毫秒
      */
-    private long timeLenger = 3000;
+    private long timeLenger = Config.waitingTime;
 
     private Button mConfirm;
 
