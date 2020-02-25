@@ -8,6 +8,10 @@
     android:gravity="center"
     tools:context=".MainActivity">
 
+    <com.lemonjun.library.view.LoadView
+        android:id="@+id/bd_load"
+        android:layout_width="150dp"
+        android:layout_height="150dp"/>
     <Button
         android:id="@+id/btn_load"
         android:layout_width="match_parent"

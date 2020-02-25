@@ -11,6 +11,7 @@ import com.lemonjun.library.base.BaseClickWarntDialog;
 import com.lemonjun.library.base.BaseLoadingDialog;
 import com.lemonjun.library.base.BaseWarntDialog;
 import com.lemonjun.library.tools.BaseDialogTools;
+import com.lemonjun.library.view.LoadView;
 
 public class MainActivity extends AppCompatActivity {
 
@@ -18,6 +19,10 @@ public class MainActivity extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
+
+        LoadView loadView = findViewById(R.id.bd_load);
+        loadView.setStatus(LoadView.State.STATUS_FINISH);
+
     }
 
     public void onClick(View view){
