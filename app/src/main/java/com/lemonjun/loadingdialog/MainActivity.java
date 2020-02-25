@@ -4,6 +4,7 @@ import androidx.appcompat.app.AppCompatActivity;
 
 import android.app.Dialog;
 import android.os.Bundle;
+import android.os.Handler;
 import android.view.View;
 
 import com.lemonjun.library.base.BaseClickWarntDialog;
@@ -22,7 +23,18 @@ public class MainActivity extends AppCompatActivity {
     public void onClick(View view){
         switch (view.getId()){
             case R.id.btn_load:
-                BaseDialogTools.getInstance().createLoadDialog(this,"hahah").show();
+                BaseDialogTools.getInstance().createLoadDialog(this,"加载中。。。");
+
+                Handler h = new Handler();
+                Runnable r = new Runnable() {
+                    @Override
+                    public void run() {
+                        BaseDialogTools.getInstance().createWarntDialog(MainActivity.this).setText("服务器返回异常");
+                    }
+                };
+
+                h.postDelayed(r,5000);
+
                 break;
             case R.id.btn_want:
                 BaseDialogTools.getInstance().createWarntDialog(this).show();
@@ -38,6 +50,5 @@ public class MainActivity extends AppCompatActivity {
                 });
                 break;
         }
-
     }
 }

@@ -7,6 +7,7 @@ import android.os.Build;
 import android.os.Bundle;
 import android.os.Handler;
 import android.text.TextUtils;
+import android.util.Log;
 import android.widget.LinearLayout;
 import android.widget.ProgressBar;
 import android.widget.TextView;
@@ -22,19 +23,19 @@ public class BaseLoadingDialog extends Dialog {
     /**
      * 用于管理对话框显示的handler
      */
-    private Handler timehandler = new Handler();
+   // private Handler timehandler = new Handler();
 
     /**
      *  时间长度 单位毫秒
      */
     private long timeLenger = Config.waitingTime;
 
-    private Runnable timeRunnable = new Runnable() {
+ /*   private Runnable timeRunnable = new Runnable() {
         @Override
         public void run() {
             dismiss();
         }
-    };
+    };*/
 
     /**
      * 对话框背景颜色
@@ -59,34 +60,31 @@ public class BaseLoadingDialog extends Dialog {
 
     public BaseLoadingDialog(@NonNull Context context, int themeResId) {
         super(context, themeResId);
-
         setCancelable(true);
         setCanceledOnTouchOutside(false);
     }
 
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-
         setContentView(R.layout.bld_layout_loading_view);
-
         loadText = findViewById(R.id.tv_content);
         mainLayout = findViewById(R.id.ll_main_layout);
         progressBar = findViewById(R.id.progressBar);
-
     }
 
     @Override
     public void show() {
         super.show();
-        timehandler.postDelayed(timeRunnable,timeLenger);
+        //timehandler.postDelayed(timeRunnable,timeLenger);
     }
 
     @Override
     public void dismiss() {
         super.dismiss();
         // 对话框关闭时 还原
-        timehandler.removeCallbacks(timeRunnable);
+        //timehandler.removeCallbacks(timeRunnable);
     }
 
     @Override
@@ -94,8 +92,8 @@ public class BaseLoadingDialog extends Dialog {
         super.onDetachedFromWindow();
     }
 
-    public BaseLoadingDialog setLoadText(CharSequence c){
-        if(loadText != null && !TextUtils.isEmpty(c)){
+    public BaseLoadingDialog setLoadText(String c){
+        if(loadText != null){
             loadText.setText(c);
         }
         return this;
