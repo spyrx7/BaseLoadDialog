@@ -180,7 +180,6 @@ public class LoadView extends View {
         float getY(float x) {
             return k * x + b;
         }
-
     }
 
     enum ProgressTag {
