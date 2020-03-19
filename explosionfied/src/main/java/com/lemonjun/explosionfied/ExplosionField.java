@@ -1,5 +1,4 @@
 package com.lemonjun.explosionfied;
-
 import android.animation.Animator;
 import android.animation.AnimatorListenerAdapter;
 import android.animation.ValueAnimator;
@@ -69,8 +68,10 @@ public class ExplosionField  extends View {
 
     public void explode(final View view) {
         Rect r = new Rect();
+        // 获取当前View 在屏幕的位置 Rect
         view.getGlobalVisibleRect(r);
         int[] location = new int[2];
+        // 目标View loction
         getLocationOnScreen(location);
         r.offset(-location[0], -location[1]);
         r.inset(-mExpandInset[0], -mExpandInset[1]);
@@ -101,6 +102,5 @@ public class ExplosionField  extends View {
                 ViewGroup.LayoutParams.MATCH_PARENT, ViewGroup.LayoutParams.MATCH_PARENT));
         return explosionField;
     }
-
 
 }
