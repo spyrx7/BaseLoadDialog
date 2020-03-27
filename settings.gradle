@@ -1,2 +1,3 @@
 include ':app', ':library', ':explosionfied'
 rootProject.name='Loadingdialog'
+include ':drawlib'
