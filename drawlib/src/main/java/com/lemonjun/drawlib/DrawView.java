@@ -2,8 +2,10 @@ package com.lemonjun.drawlib;
 import android.content.Context;
 import android.graphics.Canvas;
 import android.graphics.Color;
+import android.graphics.LinearGradient;
 import android.graphics.Paint;
 import android.graphics.RectF;
+import android.graphics.Shader;
 import android.os.Handler;
 import android.util.AttributeSet;
 import android.util.Log;
@@ -20,6 +22,15 @@ public class DrawView extends View {
 
     private int height;
 
+    private DrawStyle drawStyle;
+
+    public DrawStyle getDrawStyle() {
+        return drawStyle;
+    }
+
+    public void setDrawStyle(DrawStyle drawStyle) {
+        this.drawStyle = drawStyle;
+    }
 
     public DrawView(Context context) {
         this(context,null);
@@ -31,9 +42,9 @@ public class DrawView extends View {
 
     public DrawView(Context context, @Nullable AttributeSet attrs, int defStyleAttr) {
         super(context, attrs, defStyleAttr);
-
         this.context = context;
 
+        setDrawStyle(DrawStyle.DRAW_PEXIT_GRID);
     }
 
     @Override
@@ -58,7 +69,15 @@ public class DrawView extends View {
     protected void onDraw(Canvas canvas) {
         super.onDraw(canvas);
 
-        drawCircle(canvas);
+        switch (getDrawStyle()){
+            case DRAW_TEST:
+                drawCircle(canvas);
+                break;
+            case DRAW_PEXIT_GRID:
+                drawGrid(canvas);
+                break;
+        }
+
     }
 
     /**
@@ -70,7 +89,6 @@ public class DrawView extends View {
         canvas.drawColor(Color.BLACK);
 
         mPaint = new Paint();
-
 
         mPaint.setColor(Color.RED);
         mPaint.setStyle(Paint.Style.FILL);
@@ -98,6 +116,19 @@ public class DrawView extends View {
         mPaint.setColor(Color.parseColor("#955574"));
         canvas.drawArc(rectF,45,225,true,mPaint);
 
+        mPaint.setStrokeWidth(5);
+        mPaint.setColor(Color.WHITE);
+        canvas.drawLine(x + 200,y - 100,x + 260,y - 100,mPaint);
+        canvas.drawLine(x + 260,y - 100,x + 300,y - 120,mPaint);
+
+        Shader shader = new LinearGradient(x + 260,y - 140,x + 300,y - 140, Color.parseColor("#E91E63"),
+                Color.parseColor("#2196F3"), Shader.TileMode.CLAMP);
+
+        mPaint.setTextSize(24);
+        mPaint.setShader(shader);
+        mPaint.setShadowLayer(10,0,0,Color.WHITE);
+        canvas.drawText("蓝色的 90 %",x + 260,y - 140,mPaint);
+
         if(mProgress == 10){
             handler.post(r);
         }
@@ -118,5 +149,56 @@ public class DrawView extends View {
             }
         }
     };
+
+    private int gridWidthNum = 20;
+    private int gridHeightNum = 20;
+    private boolean isDraw = false;
+
+    private void drawGrid(Canvas canvas){
+
+        int tWidth = width / gridWidthNum;
+        int tHeight = height / gridHeightNum;
+
+
+        mPaint = new Paint();
+        mPaint.setAntiAlias(true);
+        mPaint.setStrokeWidth(50);
+
+        mPaint.setColor(Color.BLUE);
+
+        //canvas.drawPoint(25,25,mPaint);
+
+        for(int i = 0; i < gridHeightNum;i ++){
+            if(i % 2 == 0){
+                isDraw = false;
+            }else{
+                isDraw = true;
+            }
+            for(int j = 0;j < gridWidthNum ; j ++){
+                drawR(canvas,tWidth * i,tHeight * j,tWidth * (i + 1),tHeight * (j + 1),isDraw);
+            }
+        }
+
+    }
+
+    public void drawR(Canvas canvas,int l,int t,int r,int b,Boolean is){
+        if(is){
+            mPaint.setColor(Color.WHITE);
+            isDraw = false;
+        }else{
+            mPaint.setColor(Color.BLACK);
+            isDraw = true;
+        }
+        canvas.drawRect(l,t,r,b,mPaint);
+    }
+
+    public void setDrawStyle(){
+
+    }
+
+    public enum DrawStyle{
+        DRAW_TEST,
+        DRAW_PEXIT_GRID
+    }
 
 }
