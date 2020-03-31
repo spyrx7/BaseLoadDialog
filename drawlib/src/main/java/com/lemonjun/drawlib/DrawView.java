@@ -151,7 +151,7 @@ public class DrawView extends View {
     };
 
     private int gridWidthNum = 20;
-    private int gridHeightNum = 20;
+    private int gridHeightNum = 50;
     private boolean isDraw = false;
 
     private void drawGrid(Canvas canvas){
@@ -183,10 +183,10 @@ public class DrawView extends View {
 
     public void drawR(Canvas canvas,int l,int t,int r,int b,Boolean is){
         if(is){
-            mPaint.setColor(Color.WHITE);
+            mPaint.setColor(Color.parseColor("#FFE6ECEC"));
             isDraw = false;
         }else{
-            mPaint.setColor(Color.BLACK);
+            mPaint.setColor(Color.parseColor("#FF8A8E8E"));
             isDraw = true;
         }
         canvas.drawRect(l,t,r,b,mPaint);
