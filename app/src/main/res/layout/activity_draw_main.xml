@@ -1,8 +1,28 @@
 <?xml version="1.0" encoding="utf-8"?>
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
-    android:orientation="vertical" android:layout_width="match_parent"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:orientation="vertical"
+    android:layout_width="match_parent"
     android:layout_height="match_parent">
 
+        <TextView
+            android:id="@+id/tv_value"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:gravity="center"
+            android:textSize="56sp"
+            android:textColor="#2979FF"
+            android:textStyle="bold"
+            android:text="0.0"/>
+
+        <com.lemonjun.drawlib.TapeView
+            android:id="@+id/tape_view"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            app:sacleCount="40"
+            app:minValue="20"
+            app:maxValue="200"
+            app:bgColor="#F6CA7C"/>
 
         <com.lemonjun.animatorlibrary.SportsView
             android:id="@+id/sport_view"
@@ -11,6 +31,6 @@
 
         <com.lemonjun.drawlib.DrawView
             android:layout_width="match_parent"
-            android:layout_height="wrap_content"/>
+            android:layout_height="match_parent"/>
 
 </LinearLayout>

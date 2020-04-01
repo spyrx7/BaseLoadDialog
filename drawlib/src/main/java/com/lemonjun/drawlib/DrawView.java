@@ -54,16 +54,41 @@ public class DrawView extends View {
         width = MeasureSpec.getSize(widthMeasureSpec);
         height = MeasureSpec.getSize(heightMeasureSpec);
 
-        Log.e("tt","this width = " + width);
-        Log.e("tt","this height = " + height);
+        Log.e("tt","width = " + width);
+        Log.e("tt","height = " + height);
+
+        Log.e("tt","this width = " + getThisDefaultSize(widthMeasureSpec));
+        Log.e("tt","this height = " + getThisDefaultSize(heightMeasureSpec));
 
         int mWidth = context.getResources().getDisplayMetrics().widthPixels;
         int mHeight = context.getResources().getDisplayMetrics().heightPixels;
 
-        Log.e("tt","moble width = " + mWidth);
-        Log.e("tt","moble height = " + mHeight);
+
+        setMeasuredDimension(getThisDefaultSize(widthMeasureSpec)
+                ,getThisDefaultSize(heightMeasureSpec));
 
     }
+
+    public static int getThisDefaultSize(int measureSpec) {
+        int result = 600;
+        int specMode = MeasureSpec.getMode(measureSpec);
+        int specSize = MeasureSpec.getSize(measureSpec);
+
+        switch (specMode) {
+            case MeasureSpec.UNSPECIFIED:
+                result = 600;
+                break;
+            case MeasureSpec.AT_MOST:
+                result = Math.min(specSize,600);
+                break;
+            case MeasureSpec.EXACTLY:
+                result = specSize;
+                break;
+        }
+        return result;
+    }
+
+
 
     @Override
     protected void onDraw(Canvas canvas) {
@@ -151,7 +176,7 @@ public class DrawView extends View {
     };
 
     private int gridWidthNum = 20;
-    private int gridHeightNum = 50;
+    private int gridHeightNum = 20;
     private boolean isDraw = false;
 
     private void drawGrid(Canvas canvas){
@@ -175,7 +200,7 @@ public class DrawView extends View {
                 isDraw = true;
             }
             for(int j = 0;j < gridWidthNum ; j ++){
-                drawR(canvas,tWidth * i,tHeight * j,tWidth * (i + 1),tHeight * (j + 1),isDraw);
+                drawR(canvas,tWidth * j,tHeight * i,tWidth * (j + 1),tHeight * (i + 1),isDraw);
             }
         }
 

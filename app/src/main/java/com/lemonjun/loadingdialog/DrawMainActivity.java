@@ -4,11 +4,13 @@ import android.animation.Keyframe;
 import android.animation.ObjectAnimator;
 import android.animation.PropertyValuesHolder;
 import android.os.Bundle;
+import android.widget.TextView;
 
 import androidx.annotation.Nullable;
 import androidx.appcompat.app.AppCompatActivity;
 
 import com.lemonjun.animatorlibrary.SportsView;
+import com.lemonjun.drawlib.TapeView;
 
 public class DrawMainActivity extends AppCompatActivity {
 
@@ -30,5 +32,15 @@ public class DrawMainActivity extends AppCompatActivity {
         ObjectAnimator animator = ObjectAnimator.ofPropertyValuesHolder(sportView,holder);
         animator.setDuration(1000);
         animator.start();
+
+        final TextView tvValue = findViewById(R.id.tv_value);
+        TapeView tapeView = findViewById(R.id.tape_view);
+
+        tapeView.setOnValueChangeListener(new TapeView.OnValueChangeListener() {
+            @Override
+            public void onChange(float value) {
+                tvValue.setText(value + "");
+            }
+        });
     }
 }

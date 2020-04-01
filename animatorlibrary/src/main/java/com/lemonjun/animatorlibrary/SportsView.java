@@ -47,7 +47,7 @@ public class SportsView extends View {
         mPaint.setStrokeCap(Paint.Cap.ROUND);
         mPaint.setColor(Color.RED);
 
-        RectF arcRectf = new RectF(0,0,400,400);
+        RectF arcRectf = new RectF(50,50,400,400);
         canvas.drawArc(arcRectf,135,progress * 2.7f,false,mPaint);
 
         mPaint.setColor(Color.BLACK);
