@@ -5,6 +5,12 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent">
 
+
+        <com.lemonjun.drawlib.ThumbUpView
+            android:id="@+id/thup_view"
+            android:layout_width="match_parent"
+            android:layout_height="50dp"/>
+
         <TextView
             android:id="@+id/tv_value"
             android:layout_width="match_parent"

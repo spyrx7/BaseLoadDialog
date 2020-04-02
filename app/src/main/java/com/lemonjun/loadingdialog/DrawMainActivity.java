@@ -4,6 +4,7 @@ import android.animation.Keyframe;
 import android.animation.ObjectAnimator;
 import android.animation.PropertyValuesHolder;
 import android.os.Bundle;
+import android.view.View;
 import android.widget.TextView;
 
 import androidx.annotation.Nullable;
@@ -11,6 +12,7 @@ import androidx.appcompat.app.AppCompatActivity;
 
 import com.lemonjun.animatorlibrary.SportsView;
 import com.lemonjun.drawlib.TapeView;
+import com.lemonjun.drawlib.ThumbUpView;
 
 public class DrawMainActivity extends AppCompatActivity {
 
@@ -42,5 +44,14 @@ public class DrawMainActivity extends AppCompatActivity {
                 tvValue.setText(value + "");
             }
         });
+
+        ThumbUpView thup_view = findViewById(R.id.thup_view);
+       /* thup_view.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+
+            }
+        });*/
+
     }
 }

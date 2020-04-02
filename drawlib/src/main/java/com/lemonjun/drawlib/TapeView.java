@@ -224,7 +224,7 @@ public class TapeView extends View {
                 dx = lastX - x;
                 //offset -= (int) dx;
                 float target = offset;
-                target -= (int) dx;
+                target -=  dx;
                 if(target < startX && target >= endX){
                     offset = target;
                 }
@@ -251,12 +251,10 @@ public class TapeView extends View {
     private void smoothMoveToCalibration(){
         //offset = (float) (Math.round(offset / 10) * 10);
 
-        if(offset % scaleWidht == 0){
-            float value = ((startX - offset) / scaleWidht + minValue);
-            Log.e("tt","offset = " + offset + " value = " + value);
-        }
+        //float value = ((startX - offset) / scaleWidht + minValue);
+        //Log.e("tt","offset = " + offset + " value = " + value);
 
-        postInvalidate();
+        //postInvalidate();
     }
 
     private void calculateVelocity(){
@@ -278,10 +276,10 @@ public class TapeView extends View {
                 Log.d("tt","computeScroll end");
                 smoothMoveToCalibration();
             }else{
-                int x = scroller.getCurrX() / 100;
+                int x = scroller.getCurrX();
                 dx = lastX - x;
                 float target = offset;
-                target +=  x;
+                target -=  dx;
                 if(target < startX && target >= endX){
                     offset = target;
                 }

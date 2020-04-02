@@ -1,6 +1,7 @@
 package com.lemonjun.loadingdialog;
 
 import android.content.Intent;
+import android.content.pm.PackageManager;
 import android.net.Uri;
 import android.os.Bundle;
 import android.os.Handler;
@@ -93,6 +94,18 @@ public class AliPayActivity extends AppCompatActivity {
 
 
     private void openAli(){
-        webView.loadUrl("https://qr.alipay.com/bax05351pgjhc4yegd2y2084");
+        //webView.loadUrl("https://qr.alipay.com/bax05351pgjhc4yegd2y2084");
+
+     /*   Intent it = new Intent();
+        it.setClassName("com.eg.android.AlipayGphone","com.alipay.mobile.transferapp.ui.TFToAccountInputActivity_");
+        it.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
+        startActivity(it);*/
+
+
+        String package_name="com.eg.android.AlipayGphone";
+        PackageManager packageManager = getPackageManager();
+        Intent it = packageManager.getLaunchIntentForPackage(package_name);
+        startActivity(it);
+
     }
 }
