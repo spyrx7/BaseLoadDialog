@@ -24,15 +24,15 @@ public class MainActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
 
-        mExplosionField = ExplosionField.attach2Window(this);
+       /* mExplosionField = ExplosionField.attach2Window(this);
         addListener(findViewById(R.id.root));
 
         LoadView loadView = findViewById(R.id.bd_load);
-        loadView.setStatus(LoadView.State.STATUS_IDLE);
+        loadView.setStatus(LoadView.State.STATUS_IDLE);*/
 
     }
 
-    public void onClick(View view){
+   /* public void onClick(View view){
         switch (view.getId()){
             case R.id.btn_load:
                 BaseDialogTools.getInstance().createLoadDialog(this,"加载中。。。");
@@ -62,7 +62,7 @@ public class MainActivity extends AppCompatActivity {
                 });
                 break;
         }
-    }
+    }*/
 
     private void addListener(View root){
         if(root instanceof ViewGroup) {
