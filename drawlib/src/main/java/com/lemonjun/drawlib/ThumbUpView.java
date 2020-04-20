@@ -80,6 +80,7 @@ public class ThumbUpView extends View implements View.OnClickListener {
                 result = specSize;
                 break;
         }
+
         return result;
     }
 

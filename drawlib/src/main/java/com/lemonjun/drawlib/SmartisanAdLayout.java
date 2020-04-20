@@ -1,5 +1,5 @@
 package com.lemonjun.drawlib;
-
+import android.animation.ObjectAnimator;
 import android.content.Context;
 import android.graphics.Color;
 import android.util.AttributeSet;
@@ -13,6 +13,10 @@ public class SmartisanAdLayout extends ViewGroup {
     private Context context;
 
     private int minHeight ;
+
+    private int height;
+
+    private int topMargin = 0;
 
     private float lastY = 0;
 
@@ -32,6 +36,11 @@ public class SmartisanAdLayout extends ViewGroup {
         this.context = context;
 
         setBackgroundColor(Color.parseColor("#226589"));
+    }
+
+    public void setOffset(int offset) {
+        this.offset = offset;
+        requestLayout();
     }
 
     @Override
@@ -55,11 +64,14 @@ public class SmartisanAdLayout extends ViewGroup {
 
                    // Log.e("tt","childWidth = " + childWidth + " childHeight = " + childHeight);
                 }
-
             }
         }
 
         minHeight = offsety;
+
+        height = context.getResources().getDisplayMetrics().heightPixels;
+
+        //Log.e("tt","minHeight = " + minHeight);
 
         if(offset < minHeight) {
             offset = minHeight;
@@ -67,8 +79,8 @@ public class SmartisanAdLayout extends ViewGroup {
         if(offset > getMeasuredHeight()){
             offset = getMeasuredHeight();
         }
-        setMeasuredDimension(widthMeasureSpec,offset);
 
+        setMeasuredDimension(widthMeasureSpec,offset);
     }
 
     @Override
@@ -93,6 +105,8 @@ public class SmartisanAdLayout extends ViewGroup {
             }
         }
 
+        MarginLayoutParams lp = (MarginLayoutParams) getLayoutParams();
+        lp.topMargin = topMargin;
     }
 
     private int dp2px(float dp){
@@ -105,7 +119,7 @@ public class SmartisanAdLayout extends ViewGroup {
 
     @Override
     public boolean onTouchEvent(MotionEvent event) {
-        float y = event.getY();
+        float y = event.getRawY();
         switch (event.getAction()){
             case MotionEvent.ACTION_DOWN:
                 lastY = y;
@@ -113,21 +127,59 @@ public class SmartisanAdLayout extends ViewGroup {
                 break;
             case MotionEvent.ACTION_MOVE:
                 dy = y - lastY;
-                Log.e("tt","dy = " + dy );
-                if(offset <= getMeasuredHeight()) {
-                    offset += (int) dy;
-                }else {
-                    offset = getMeasuredHeight();
+
+                if(offset == minHeight){
+                        /*topMargin += (int) dy;
+                        if(topMargin > 0){
+                            topMargin = 0;
+                        }
+                        if(topMargin < -minHeight){
+                            topMargin = -minHeight;
+                        }*/
+                        Log.e("tt"," topMargin " + topMargin);
                 }
+
+                Log.e("tt","dy = " + dy );
+                if(topMargin == 0) {
+                    if (offset <= getMeasuredHeight()) {
+                        offset += (int) dy;
+                    } else {
+                        offset = getMeasuredHeight();
+                    }
+                }
+
+           /*     if(offset <= minHeight){
+                    topMargin += (int) dy;
+
+                }*/
+
+                if(offset == minHeight){
+                    Log.e("tt"," topMargin == offset ");
+                }
+
                 requestLayout();
                 break;
             case MotionEvent.ACTION_UP:
-
+                //Log.e("tt","offset = " + offset );
+                if(topMargin == 0) {
+                    if (offset >= height / 2) {
+                        anim(offset, height);
+                    } else {
+                        anim(offset, minHeight);
+                    }
+                }
                 return false;
             default:
                 return false;
         }
         lastY = y;
         return true;
+    }
+
+    private void anim(int... doto){
+
+        ObjectAnimator animator = ObjectAnimator.ofInt(this,"offset",doto);
+        animator.setDuration(300);
+        animator.start();
     }
 }

@@ -5,7 +5,7 @@ android {
     buildToolsVersion "29.0.2"
     defaultConfig {
         applicationId "com.lemonjun.loadingdialog"
-        minSdkVersion 14
+        minSdkVersion 15
         targetSdkVersion 29
         versionCode 1
         versionName "1.0"
@@ -15,6 +15,17 @@ android {
         release {
             minifyEnabled false
             proguardFiles getDefaultProguardFile('proguard-android-optimize.txt'), 'proguard-rules.pro'
+        }
+    }
+
+    /**
+     * 设置支持的SO库架构[手动集成]
+     * 默认so文件加载目录为:src/main/jniLibs
+     * 如在build.gradle按照如下方式：自定义了so文件加载目录请确保对应目录下只有armeabi目录
+     */
+    sourceSets {
+        main {
+            jniLibs.srcDir(['libs'])
         }
     }
 }
@@ -30,4 +41,9 @@ dependencies {
     implementation project(path: ':explosionfied')
     implementation project(path: ':drawlib')
     implementation project(path: ':animatorlibrary')
+
+    //implementation 'com.tencent.map:tencent-map-vector-sdk:latest.release'
+    implementation 'com.tencent.map.geolocation:TencentLocationSdk-openplatform:7.2.6'
+    implementation files('libs\\TencentMapSDK_Raster_v_1.3.4.1.jar')
+
 }
